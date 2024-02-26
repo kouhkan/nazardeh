@@ -6,7 +6,7 @@ from flask import Flask
 def create_app(config=None):
     """Application factory."""
     app = Flask(__name__)
-    app.url_map.strict_slashes = False
+    app.url_map.strict_slashes = True
 
     _register_configurations(app, config)
     _register_extensions(app)
@@ -25,7 +25,7 @@ def _register_extensions(app: Flask):
     from src.extensions import __all__ as extensions
 
     for extension in extensions:
-        extension.init_app(app)
+        extension.init_app(app=app)
 
 
 def _register_modules(app: Flask):
